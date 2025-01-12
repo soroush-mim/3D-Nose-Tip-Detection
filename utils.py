@@ -22,7 +22,7 @@ def load_ply_file(file_path, normalize=True):
     return cloud
 
 
-def plot_2d_o3d(cloud, title=""):
+def plot_2d_o3d(cloud, title="", ):
     """ plot a 2D projection of a point cloud
 
     Args:
@@ -81,6 +81,25 @@ def draw_geometries(geometries, points_to_draw):
 
     fig.show()
 
+
+def plot_3d_o3d(cloud, nose_tip=None, save_path=None):
+    """ plot a 3D point cloud using matplotlib
+
+    Args:
+        cloud (o3d object): point cloud
+        nose_tip (np.array, optional): nose tip. Defaults to None.
+        save_path (str, optional): path to save the plot. Defaults to None.
+    """    
+
+    points = np.asarray(cloud.points)
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(points[:, 0], points[:, 1], points[:, 2], c='b', marker='o')
+    if nose_tip is not None:
+        ax.scatter(nose_tip[0], nose_tip[1], nose_tip[2], c='r', marker='o')
+    if save_path is not None:
+        plt.savefig(save_path)
+    plt.show()
 
 def get_most_protruding_point(cloud):
     """ get the most protruding point of a point cloud
