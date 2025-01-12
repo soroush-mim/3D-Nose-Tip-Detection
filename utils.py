@@ -35,6 +35,26 @@ def plot_2d_o3d(cloud, title="", ):
     fig.show()
 
 
+def plot_mat(points, nose_tip=None, save_path=None):
+    projected_points = points[:, :2]  # Keep only the x and y coordinates
+
+    # Create a 2D image (a scatter plot in this case)
+    plt.figure(figsize=(8, 8))
+    plt.scatter(projected_points[:, 0], projected_points[:, 1], s=3, marker='.')
+
+    # Set labels and title
+    plt.xlabel("X-coordinate")
+    plt.ylabel("Y-coordinate")
+    plt.title("2D Projection of Point Cloud")
+
+    if nose_tip is not None:
+        plt.scatter(nose_tip[0], nose_tip[1], c='r', marker='o')
+    if save_path is not None:
+        plt.savefig(save_path)
+
+    # Display the image
+    plt.show()
+
 def draw_geometries(geometries, points_to_draw):
     """ create a 3D plot of the point clouds using plotly
 
@@ -100,6 +120,7 @@ def plot_3d_o3d(cloud, nose_tip=None, save_path=None):
     if save_path is not None:
         plt.savefig(save_path)
     plt.show()
+
 
 def get_most_protruding_point(cloud):
     """ get the most protruding point of a point cloud
