@@ -28,16 +28,18 @@ if args.path.endswith('.ply'):
     most_protruding_point = get_most_protruding_point(cloud)
     end = time.time()
     print('first solution: most_protruding_point', most_protruding_point)
-    print('time:', end - start)
-    plot_3d_o3d(cloud, most_protruding_point, save_path=f'Results/{file_name}_first_solution.png')
+    print('time(S):', end - start)
+    plot_mat(np.asarray(cloud.points), most_protruding_point, save_path=f'Results/{file_name}_first_solution.png')
+    
+
     # sec solution
     start = time.time()
     nose_tip = sec_sol(cloud)
     end = time.time()
 
-    print('sec solution: ' nose_tip)
-    print('time:', end - start)
-    plot_3d_o3d(cloud, nose_tip, save_path=f'Results/{file_name}_sec_solution.png')
+    print('sec solution: ', nose_tip)
+    print('time(S):', end - start)
+    plot_mat(np.asarray(cloud.points), nose_tip, save_path=f'Results/{file_name}_sec_solution.png')
 
 
 # if the path is a directory, read all the ply files in the directory
@@ -73,8 +75,8 @@ elif os.path.isdir(args.path):
     mae_sec = np.mean(np.abs(sec_sols - ground_truth))
 
     print('MAE first solution:', mae_first)
-    print('first solution time:', time_first/len(clouds))
-    print('sec solution time:', time_sec/len(clouds))
+    print('first solution avg time(S):', time_first/len(clouds))
+    print('sec solution avg time(S):', time_sec/len(clouds))
     print('MAE sec solution:', mae_sec)
 else:
     print("Invalid path")
