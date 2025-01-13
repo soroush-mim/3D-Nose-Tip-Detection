@@ -16,7 +16,7 @@ There is also a jupyter notebook in which I have implemented two solutions. This
 
 - [Installation](#installation)
 - [Usage](#usage)
-
+- [Visualization](#visualization)
 
 ## Installation
 
@@ -50,3 +50,6 @@ There is also a jupyter notebook in which I have implemented two solutions. This
    python main.py --path Data
    #for all ply files in the Data folder, it  will calculate the nose tip using 2 solutions.
    #Then, calculate each solution's MAE and average inference time.
+
+## Visualization
+In the Jupyter notebook there are 3d visualizations using plotly for the implemented methods.
