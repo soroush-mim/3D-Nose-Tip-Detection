@@ -137,7 +137,7 @@ def get_most_protruding_point(cloud):
     return points[max_z_index]
 
 
-def DBSCAN_clustering(cloud, eps=0.024, min_samples=21):
+def DBSCAN_clustering(cloud, eps=0.026, min_samples=21):
     """ cluster a point cloud using DBSCAN
 
     Args:
@@ -159,11 +159,11 @@ def DBSCAN_clustering(cloud, eps=0.024, min_samples=21):
             continue
         cluster = points[labels == label]
         clusters.append(cluster)
-    return clusters
+    return clusters, labels
 
 
-def find_nose_cluster(cloud, clusters):
-    """ find the cluster that contains the most protruding point
+def find_nose_cluster(cloud, labels):
+    """ find the second lowest cluster in the point cloud
 
     Args:
         cloud (o3d object): point cloud
@@ -173,11 +173,24 @@ def find_nose_cluster(cloud, clusters):
         np.array: nose cluster
     """    
 
-    most_protruding_point = get_most_protruding_point(cloud)
-    for cluster in clusters:
-        if most_protruding_point in cluster:
-            return cluster
-    return None
+    points = np.asarray(cloud.points)
+    unique_labels = np.unique(labels)
+    unique_labels = unique_labels[unique_labels != -1]  # Exclude noise points
+
+    min_y_values = []
+    for cluster_label in unique_labels:
+        cluster_points = points[labels == cluster_label]
+        min_y_values.append(np.min(cluster_points[:, 1]))
+
+    sorted_indices = np.argsort(min_y_values)
+    second_min_y_cluster_index = sorted_indices[1]
+    second_min_y_cluster_label = unique_labels[second_min_y_cluster_index]
+
+    # print(f"Cluster with the second minimum y-coordinate: {second_min_y_cluster_label}")
+
+    second_min_y_cluster_points = points[labels == second_min_y_cluster_label]
+
+    return second_min_y_cluster_points
 
 
 def find_middle_point(cluster):
