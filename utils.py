@@ -207,3 +207,12 @@ def find_middle_point(cluster):
     max_x = np.max(cluster[:, 0])    
 
     return (min_x + max_x) / 2
+
+def sec_sol(cloud):
+    #perform second solution
+    clusters, labels = DBSCAN_clustering(cloud, eps=0.009, min_samples=24)
+    nose_cluster = find_nose_cluster(cloud, labels)
+    nose_tip_x = find_middle_point(nose_cluster)
+    most_protruding_point = nose_cluster[np.argmax(nose_cluster[:, 2])]
+    nose_tip = np.array([nose_tip_x, most_protruding_point[1], most_protruding_point[2]])
+    return nose_tip
