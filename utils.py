@@ -216,3 +216,4 @@ def sec_sol(cloud):
     most_protruding_point = nose_cluster[np.argmax(nose_cluster[:, 2])]
     nose_tip = np.array([nose_tip_x, most_protruding_point[1], most_protruding_point[2]])
     return nose_tip
+
