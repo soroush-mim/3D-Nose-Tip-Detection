@@ -10,6 +10,8 @@ This project implements two methods for detecting the nose tip in 3D facial poin
 
 For the data, I sampled some files from the d3dfacs_alignments dataset and labeled the nose tip manually. You can see this data in the Data folder.
 
+There is also a jupyter notebook in which I have implemented two solutions. This notebook performs the 2 solutions on 2 ply data samples and visualizes them in 3D.
+
 ## Table of Contents
 
 - [Installation](#installation)
