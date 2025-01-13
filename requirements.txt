@@ -1,0 +1,5 @@
+numpy==1.21.0
+open3d==0.13.0
+plotly==5.3.1
+scikit-learn==0.24.2
+matplotlib==3.4.2
